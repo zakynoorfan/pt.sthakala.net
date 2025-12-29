@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Sthakala | Consultant Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #2C3639;
+            --secondary: #A27B5C;
+            --accent: #DCD7C9;
+            --white: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--white);
+            color: var(--primary);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(rgba(44, 54, 57, 0.7), rgba(44, 54, 57, 0.7)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pilar-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(162, 123, 92, 0.3);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold tracking-widest text-[#2C3639] brand">STHAKALA</span>
+                </div>
+                <div class="image">
+                    <img src="./sthakala.png">
+                    <style>
+                        img{
+                            width: 70px;
+                            height: 150px;
+                        }
+                    </style>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-wider">
+                    <a href="#home" class="hover:text-[#A27B5C] transition">Beranda</a>
+                    <a href="#about" class="hover:text-[#A27B5C] transition">Tentang Kami</a>
+                    <a href="#ai-concept" class="text-[#A27B5C] hover:opacity-80 transition italic">✨ Concept Studio</a>
+                    <a href="#contact" class="px-5 py-2 bg-[#2C3639] text-white rounded-full hover:bg-[#A27B5C] transition">Hubungi Kami</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient h-screen flex items-center text-white pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 italic">Mendirikan Yang Tak Terlihat.</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-10">
+                Kami menciptakan bangunan yang indah di mata sekaligus damai di jiwa melalui harmoni estetika modern dan kearifan filosofis.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#ai-concept" class="bg-[#A27B5C] px-8 py-4 rounded-full font-bold hover:bg-[#8d6a4f] transition shadow-lg">
+                    ✨ Ciptakan Konsep Anda
+                </a>
+            </div>
+        </div> 
+    </section>
+
+    <!-- AI Concept Generator Section -->
+    <section id="ai-concept" class="py-24 bg-[#DCD7C9]/20 border-y border-[#A27B5C]/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-[#A27B5C] font-semibold tracking-widest uppercase text-xs">Powered by Gemini AI</span>
+            <h2 class="text-4xl font-bold mt-2 mb-6">Visualisasikan Filosofi Ruang Anda</h2>
+            <p class="text-gray-600 mb-10">Gunakan AI kami untuk menerjemahkan keinginan Anda menjadi narasi filosofis Arsitektur Sthakala.</p>
+            
+            <div class="bg-white p-8 rounded-3xl shadow-xl ai-glow">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-left text-sm font-bold text-gray-700 mb-2">Kata Kunci atau Suasana (Contoh: Modern Tropis, Hutan, Ketenangan)</label>
+                        <input id="promptInput" type="text" placeholder="Masukkan visi Anda di sini..." 
+                               class="w-full px-6 py-4 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#A27B5C] outline-none transition">
+                    </div>
+                    <button id="generateBtn" onclick="generateConcept()" class="w-full bg-[#2C3639] text-white py-4 rounded-xl font-bold hover:bg-[#A27B5C] transition flex items-center justify-center gap-2">
+                        <span>✨ Terjemahkan Menjadi Makna</span>
+                        <div id="loader" class="hidden animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                    </button>
+                    <div id="resultArea" class="hidden mt-8 text-left bg-[#F9F9F9] p-6 rounded-2xl border-l-4 border-[#A27B5C]">
+                        <h4 class="font-bold text-[#A27B5C] mb-2 italic tracking-wide">Narasi Arsitektur Sthakala:</h4>
+                        <p id="responseText" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami & Tiga Pilar -->
+    <section id="about" class="py-24 bg-[#F9F9F9]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-[#A27B5C] font-semibold tracking-widest uppercase text-sm">Tentang Kami</span>
+                <h2 class="text-4xl font-bold mt-2">Tiga Pilar Keunggulan STHAKALA</h2>
+                <div class="w-20 h-1 bg-[#A27B5C] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Pilar 1 -->
+                <div class="pilar-card bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="text-4xl mb-6">🌱</div>
+                    <h3 class="text-2xl font-bold mb-4">Desain Berkelanjutan & Lokal</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Prioritas material ramah lingkungan dan keahlian lokal. Hasilnya: <span class="font-bold text-[#2C3639]">Operational Cost Savings</span> dan desain yang Timeless.
+                    </p>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="pilar-card bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="text-4xl mb-6">🤝</div>
+                    <h3 class="text-2xl font-bold mb-4">Personalized Co-Creation</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Pendekatan Konsultasi Personal yang mendalam, melibatkan klien untuk menerjemahkan filosofi hidup mereka ke dalam arsitektur.
+                    </p>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="pilar-card bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="text-4xl mb-6">💰</div>
+                    <h3 class="text-2xl font-bold mb-4">Premium Pricing & Branding</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Desain berfilosofi kami memiliki <span class="font-bold text-[#2C3639]">nilai jual/sewa 15-25% lebih tinggi</span>, menjadikannya aset jangka panjang yang memperkuat branding.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6 italic">Terhubung dengan Kami</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Siap untuk menciptakan ruang yang memiliki makna? Tim ahli kami siap mendampingi setiap langkah dari konsep hingga konstruksi.
+                    </p>
+                    <div class="space-y-6">
+                        <a href="https://wa.me/6285727253042" target="_blank" class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-gray-500 uppercase font-bold tracking-tighter">WhatsApp</span>
+                                <span class="text-lg font-semibold">+62 857-2725-3042</span>
+                            </div>
+                        </a>
+                        <a href="https://instagram.com/Krng_smdra" target="_blank" class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white rounded-full flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="fa-brands fa-instagram text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-gray-500 uppercase font-bold tracking-tighter">Instagram</span>
+                                <span class="text-lg font-semibold">@Krng_smdra</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-10 rounded-3xl shadow-sm">
+                    <form onsubmit="event.preventDefault();" class="space-y-4">
+                        <input type="text" placeholder="Nama Lengkap" class="w-full px-6 py-4 bg-white rounded-xl border border-gray-200 outline-none">
+                        <input type="email" placeholder="Email" class="w-full px-6 py-4 bg-white rounded-xl border border-gray-200 outline-none">
+                        <textarea placeholder="Pesan Anda" rows="4" class="w-full px-6 py-4 bg-white rounded-xl border border-gray-200 outline-none"></textarea>
+                        <button class="w-full bg-[#2C3639] text-white py-4 rounded-xl font-bold hover:bg-[#A27B5C] transition">Kirim Formulir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Bot AI Floating -->
+    <div id="aiChat" class="fixed bottom-6 right-6 z-[60]">
+        <button onclick="toggleChat()" class="w-16 h-16 bg-[#A27B5C] text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+            <i class="fa-solid fa-sparkles text-2xl"></i>
+            <div class="image">
+                <img src="./aibg.png">
+                <style>
+                    img {
+                        width: 50px;
+                        height: 50px;
+                    }
+                </style>
+            </div>
+        </button>
+        <div id="chatBox" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+            <div class="bg-[#2C3639] p-4 text-white flex justify-between items-center">
+                <span class="font-bold flex items-center gap-2 italic">✨ Sthakala AI Assistant</span>
+                <button onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="chatMessages" class="h-64 overflow-y-auto p-4 space-y-4 text-sm bg-gray-50">
+                <div class="bg-[#DCD7C9]/30 p-3 rounded-2xl rounded-tl-none text-gray-800 italic">
+                    "Selamat datang. Saya adalah AI PT Sthakala. Ada yang bisa saya bantu terkait filosofi desain kami?"
+                </div>
+            </div>
+            <div class="p-4 border-t flex gap-2">
+                <input id="chatInput" type="text" placeholder="Tanyakan filosofi..." class="flex-1 bg-gray-100 px-4 py-2 rounded-full outline-none text-sm">
+                <button onclick="sendChatMessage()" class="text-[#A27B5C]"><i class="fa-solid fa-paper-plane text-xl"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#2C3639] text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="brand text-3xl tracking-widest mb-4">STHAKALA</h2>
+            <p class="text-gray-400 text-xs mb-8 italic">Mendirikan Makna, Mengabadikan Jiwa.</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-widest">© 2024 PT Sthakala Consultant Architect</p>
+        </div>
+    </footer>
+
+    <script>
+        const apiKey = ""; // API key will be injected at runtime
+
+        async function callGemini(prompt, isChat = false) {
+            const systemPrompt = isChat 
+                ? "Anda adalah asisten AI untuk PT Sthakala, sebuah firma arsitektur yang fokus pada filosofi 'Sthapana Niskala' (Mendirikan Makna). Anda ahli dalam desain berkelanjutan, harmoni budaya, dan arsitektur modern yang berakar pada tradisi. Jawablah dengan nada elegan, tenang, dan profesional dalam Bahasa Indonesia."
+                : "Tugas Anda adalah membuat narasi filosofis singkat (maks 3 kalimat) untuk konsep arsitektur berdasarkan kata kunci pengguna. Gunakan gaya bahasa puitis namun profesional yang mencerminkan brand Sthakala (Sekala & Niskala).";
+
+            try {
+                let delay = 1000;
+                for (let i = 0; i < 5; i++) {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+                throw new Error("Gagal menghubungi server setelah 5 kali percobaan.");
+            } catch (error) {
+                console.error(error);
+                return "Maaf, terjadi gangguan saat menghubungkan ke kecerdasan buatan. Silakan hubungi kami via WhatsApp.";
+            }
+        }
+
+        async function generateConcept() {
+            const input = document.getElementById('promptInput');
+            const btn = document.getElementById('generateBtn');
+            const loader = document.getElementById('loader');
+            const resultArea = document.getElementById('resultArea');
+            const responseText = document.getElementById('responseText');
+
+            if (!input.value.trim()) return;
+
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+
+            const result = await callGemini(`Tolong buatkan filosofi arsitektur untuk tema: ${input.value}`);
+            
+            responseText.innerText = result;
+            resultArea.classList.remove('hidden');
+            loader.classList.add('hidden');
+            btn.disabled = false;
+        }
+
+        function toggleChat() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.classList.toggle('hidden');
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const container = document.getElementById('chatMessages');
+            if (!input.value.trim()) return;
+
+            const userMsg = input.value;
+            input.value = '';
+
+            // User bubble
+            const userBubble = document.createElement('div');
+            userBubble.className = "bg-[#2C3639] text-white p-3 rounded-2xl rounded-tr-none text-right ml-12";
+            userBubble.innerText = userMsg;
+            container.appendChild(userBubble);
+            container.scrollTop = container.scrollHeight;
+
+            // Loading bubble
+            const loadingBubble = document.createElement('div');
+            loadingBubble.className = "text-gray-400 italic text-xs animate-pulse p-2";
+            loadingBubble.innerText = "Sthakala AI sedang mengetik...";
+            container.appendChild(loadingBubble);
+
+            const response = await callGemini(userMsg, true);
+            
+            container.removeChild(loadingBubble);
+            const aiBubble = document.createElement('div');
+            aiBubble.className = "bg-[#DCD7C9]/30 p-3 rounded-2xl rounded-tl-none text-gray-800 italic";
+            aiBubble.innerText = response;
+            container.appendChild(aiBubble);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Handle Enter key for chat
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        });
+    </script>
+
+</body>
+</html>
